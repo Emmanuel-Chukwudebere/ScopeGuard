@@ -1,0 +1,33 @@
+import { NextResponse } from "next/server";
+import { nanoid } from "nanoid";
+import { getProject, saveProject } from "@/lib/redis";
+
+export async function POST(request: Request) {
+  const { projectId } = await request.json();
+  const project = await getProject(projectId);
+
+  if (!project) {
+    return NextResponse.json({ error: "Project not found" }, { status: 404 });
+  }
+  if (project.status !== "PENDING") {
+    return NextResponse.json(
+      { error: "Project cannot be approved in current state" },
+      { status: 400 }
+    );
+  }
+
+  project.status = "LOCKED";
+  project.activityLog.push({
+    id: nanoid(8),
+    date: new Date().toISOString(),
+    type: "SYSTEM",
+    message: "Client approved SOW. Scope locked.",
+    scopeVerdict: null,
+    reviewStatus: null,
+    surcharge: null,
+    aiReasoning: null,
+  });
+
+  await saveProject(project);
+  return NextResponse.json(project);
+}
