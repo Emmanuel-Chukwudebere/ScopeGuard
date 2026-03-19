@@ -1,0 +1,82 @@
+<h2>ScopeGuard — Architecture Overview</h2>
+<p class="subtitle">Page structure, API routes, and data flow</p>
+
+<div class="section">
+  <h3>Pages</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 12px;">
+    <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 16px;">
+      <div style="color: #7c6ff7; font-weight: 600; font-size: 13px; margin-bottom: 8px;">/create</div>
+      <div style="color: #e0e0e0; font-size: 14px; font-weight: 500;">Freelancer Setup</div>
+      <ul style="color: #999; font-size: 12px; margin-top: 8px; padding-left: 16px;">
+        <li>Paste client notes</li>
+        <li>Set base price</li>
+        <li>Add Raenest link</li>
+        <li>AI generates SOW</li>
+        <li>Review & generate portal link</li>
+      </ul>
+    </div>
+    <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 16px;">
+      <div style="color: #7c6ff7; font-weight: 600; font-size: 13px; margin-bottom: 8px;">/project/[id]</div>
+      <div style="color: #e0e0e0; font-size: 14px; font-weight: 500;">Freelancer Dashboard</div>
+      <ul style="color: #999; font-size: 12px; margin-top: 8px; padding-left: 16px;">
+        <li>View SOW & status</li>
+        <li>Post updates to timeline</li>
+        <li>Review gray-area requests</li>
+        <li>Mark project complete</li>
+        <li>Share client portal link</li>
+      </ul>
+    </div>
+    <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 16px;">
+      <div style="color: #7c6ff7; font-weight: 600; font-size: 13px; margin-bottom: 8px;">/portal/[id]</div>
+      <div style="color: #e0e0e0; font-size: 14px; font-weight: 500;">Client Portal</div>
+      <ul style="color: #999; font-size: 12px; margin-top: 8px; padding-left: 16px;">
+        <li>View SOW (read-only)</li>
+        <li>Approve & lock scope</li>
+        <li>Submit change requests</li>
+        <li>View activity timeline</li>
+        <li>Release payment button</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 24px;">
+  <h3>API Routes</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+    <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 14px;">
+      <code style="color: #4ade80; font-size: 12px;">POST /api/generate-sow</code>
+      <p style="color: #999; font-size: 12px; margin-top: 6px;">Takes client notes + price → calls Mistral → returns SOW JSON → saves to Upstash Redis</p>
+    </div>
+    <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 14px;">
+      <code style="color: #4ade80; font-size: 12px;">POST /api/approve</code>
+      <p style="color: #999; font-size: 12px; margin-top: 6px;">Client approves SOW → status changes PENDING → LOCKED</p>
+    </div>
+    <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 14px;">
+      <code style="color: #4ade80; font-size: 12px;">POST /api/update</code>
+      <p style="color: #999; font-size: 12px; margin-top: 6px;">Freelancer posts update or marks complete → appends to activity log</p>
+    </div>
+    <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 14px;">
+      <code style="color: #4ade80; font-size: 12px;">POST /api/check-scope</code>
+      <p style="color: #999; font-size: 12px; margin-top: 6px;">Client submits request → Mistral compares against locked SOW → returns IN_SCOPE / GRAY_AREA / OUT_OF_SCOPE</p>
+    </div>
+    <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 14px;">
+      <code style="color: #4ade80; font-size: 12px;">POST /api/review</code>
+      <p style="color: #999; font-size: 12px; margin-top: 6px;">Freelancer approves/rejects gray-area request → updates log entry + optional surcharge</p>
+    </div>
+    <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 14px;">
+      <code style="color: #4ade80; font-size: 12px;">GET /api/project/[id]</code>
+      <p style="color: #999; font-size: 12px; margin-top: 6px;">Fetches full project JSON from Upstash Redis — used by all pages</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 24px;">
+  <h3>Data Flow</h3>
+  <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 20px; font-family: monospace; font-size: 13px; color: #e0e0e0; line-height: 2;">
+    <span style="color: #7c6ff7;">Freelancer</span> → pastes notes → <span style="color: #4ade80;">/api/generate-sow</span> → <span style="color: #f59e0b;">Mistral AI</span> → SOW JSON → <span style="color: #60a5fa;">Upstash Redis</span><br>
+    <span style="color: #7c6ff7;">Freelancer</span> → shares link → <span style="color: #ec4899;">Client</span> opens <span style="color: #4ade80;">/portal/[id]</span><br>
+    <span style="color: #ec4899;">Client</span> → approves → <span style="color: #4ade80;">/api/approve</span> → status: LOCKED → <span style="color: #60a5fa;">Upstash Redis</span><br>
+    <span style="color: #ec4899;">Client</span> → submits request → <span style="color: #4ade80;">/api/check-scope</span> → <span style="color: #f59e0b;">Mistral AI</span> → 3-tier verdict<br>
+    <span style="color: #7c6ff7;">Freelancer</span> → marks complete → status: COMPLETED → payment button appears
+  </div>
+</div>

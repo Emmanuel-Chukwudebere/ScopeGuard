@@ -1,0 +1,187 @@
+<h2>ScopeGuard — UI Wireframes</h2>
+<p class="subtitle">Three core views — click to select which feels right</p>
+
+<div class="section">
+  <h3>1. Freelancer Setup (/create)</h3>
+  <div class="mockup">
+    <div class="mockup-header">scopeguard.vercel.app/create</div>
+    <div class="mockup-body" style="padding: 24px;">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div style="font-size: 20px; font-weight: 700; color: #e0e0e0;">ScopeGuard</div>
+        <div style="font-size: 13px; color: #888; margin-top: 4px;">Eliminate scope creep. Get paid.</div>
+      </div>
+
+      <div style="max-width: 500px; margin: 0 auto;">
+        <label style="color: #aaa; font-size: 12px; display: block; margin-bottom: 4px;">Your Name</label>
+        <input class="mock-input" placeholder="Emmanuel" style="width: 100%; margin-bottom: 16px;">
+
+        <label style="color: #aaa; font-size: 12px; display: block; margin-bottom: 4px;">Client Notes / Chat History</label>
+        <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 6px; padding: 12px; min-height: 120px; color: #666; font-size: 13px; margin-bottom: 16px;">
+          Paste your client conversation, project brief, or requirements here...
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+          <div>
+            <label style="color: #aaa; font-size: 12px; display: block; margin-bottom: 4px;">Base Price ($)</label>
+            <input class="mock-input" placeholder="500" style="width: 100%;">
+          </div>
+          <div>
+            <label style="color: #aaa; font-size: 12px; display: block; margin-bottom: 4px;">Raenest Payment Link</label>
+            <input class="mock-input" placeholder="https://pay.raenest.com/..." style="width: 100%;">
+          </div>
+        </div>
+
+        <button class="mock-button" style="width: 100%; padding: 12px; background: #7c6ff7; border: none; color: white; font-weight: 600; font-size: 14px; border-radius: 6px;">Generate SOW with AI</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 32px;">
+  <h3>2. Freelancer Dashboard (/project/[id])</h3>
+  <div class="mockup">
+    <div class="mockup-header">scopeguard.vercel.app/project/abc-xyz-123</div>
+    <div class="mockup-body" style="padding: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+          <div style="font-size: 18px; font-weight: 700; color: #e0e0e0;">Project Dashboard</div>
+          <div style="font-size: 12px; color: #888;">Client: Alex Johnson</div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <span style="background: #4ade80; color: #1a1a2e; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600;">LOCKED</span>
+          <span style="background: #f59e0b; color: #1a1a2e; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">1 Review</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <!-- Left: SOW -->
+        <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 16px;">
+          <div style="color: #7c6ff7; font-size: 12px; font-weight: 600; margin-bottom: 8px;">SCOPE OF WORK</div>
+          <div style="color: #4ade80; font-size: 11px; font-weight: 600; margin-bottom: 4px;">IN SCOPE</div>
+          <ul style="color: #ccc; font-size: 12px; padding-left: 16px; margin-bottom: 12px;">
+            <li>Landing Page</li><li>Contact Form</li><li>Responsive Design</li>
+          </ul>
+          <div style="color: #ef4444; font-size: 11px; font-weight: 600; margin-bottom: 4px;">OUT OF SCOPE</div>
+          <ul style="color: #999; font-size: 12px; padding-left: 16px; margin-bottom: 12px;">
+            <li>User Login</li><li>Database Setup</li>
+          </ul>
+          <div style="border-top: 1px solid #333; padding-top: 8px; color: #e0e0e0; font-weight: 600; font-size: 14px;">Total: $500</div>
+        </div>
+
+        <!-- Right: Timeline + Actions -->
+        <div>
+          <!-- Gray area review card -->
+          <div style="background: #332b00; border: 1px solid #f59e0b; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+            <div style="font-size: 11px; color: #f59e0b; font-weight: 600; margin-bottom: 4px;">GRAY AREA — NEEDS YOUR REVIEW</div>
+            <div style="color: #e0e0e0; font-size: 13px; margin-bottom: 4px;">"Can we add a newsletter signup?"</div>
+            <div style="color: #999; font-size: 11px; margin-bottom: 8px;">AI: Related to contact form but not explicitly listed.</div>
+            <div style="display: flex; gap: 8px;">
+              <button style="background: #4ade80; color: #1a1a2e; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer;">Approve</button>
+              <button style="background: #333; color: #e0e0e0; border: 1px solid #555; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">+ Surcharge</button>
+              <button style="background: #333; color: #ef4444; border: 1px solid #555; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Reject</button>
+            </div>
+          </div>
+
+          <!-- Post update -->
+          <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+            <input class="mock-input" placeholder="Post an update..." style="width: 100%; margin-bottom: 8px;">
+            <div style="display: flex; gap: 8px;">
+              <button class="mock-button" style="font-size: 11px; padding: 6px 12px;">Post Update</button>
+              <button style="background: #60a5fa; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Mark Complete</button>
+            </div>
+          </div>
+
+          <!-- Timeline -->
+          <div style="border-left: 2px solid #333; padding-left: 12px;">
+            <div style="margin-bottom: 10px;">
+              <div style="color: #888; font-size: 10px;">Mar 19, 2:00 PM</div>
+              <div style="color: #e0e0e0; font-size: 12px;">Frontend UI finished</div>
+              <span style="color: #7c6ff7; font-size: 10px;">FREELANCER</span>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <div style="color: #888; font-size: 10px;">Mar 19, 10:00 AM</div>
+              <div style="color: #e0e0e0; font-size: 12px;">Client approved SOW. Scope locked.</div>
+              <span style="color: #888; font-size: 10px;">SYSTEM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Client link share -->
+      <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 12px; margin-top: 16px; display: flex; align-items: center; justify-content: space-between;">
+        <div>
+          <div style="color: #888; font-size: 11px;">Client Portal Link</div>
+          <div style="color: #60a5fa; font-size: 13px;">scopeguard.vercel.app/portal/abc-xyz-123</div>
+        </div>
+        <button class="mock-button" style="font-size: 11px; padding: 6px 12px;">Copy Link</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 32px;">
+  <h3>3. Client Portal (/portal/[id])</h3>
+  <div class="mockup">
+    <div class="mockup-header">scopeguard.vercel.app/portal/abc-xyz-123</div>
+    <div class="mockup-body" style="padding: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+          <div style="font-size: 18px; font-weight: 700; color: #e0e0e0;">Your Project Portal</div>
+          <div style="font-size: 12px; color: #888;">Managed by Emmanuel</div>
+        </div>
+        <span style="background: #4ade80; color: #1a1a2e; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600;">LOCKED</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <!-- Left: SOW (read-only) -->
+        <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 16px;">
+          <div style="color: #7c6ff7; font-size: 12px; font-weight: 600; margin-bottom: 8px;">SCOPE OF WORK</div>
+          <div style="color: #4ade80; font-size: 11px; font-weight: 600; margin-bottom: 4px;">IN SCOPE</div>
+          <ul style="color: #ccc; font-size: 12px; padding-left: 16px; margin-bottom: 12px;">
+            <li>Landing Page</li><li>Contact Form</li><li>Responsive Design</li>
+          </ul>
+          <div style="color: #ef4444; font-size: 11px; font-weight: 600; margin-bottom: 4px;">OUT OF SCOPE</div>
+          <ul style="color: #999; font-size: 12px; padding-left: 16px; margin-bottom: 12px;">
+            <li>User Login</li><li>Database Setup</li>
+          </ul>
+          <div style="border-top: 1px solid #333; padding-top: 8px; color: #e0e0e0; font-weight: 600; font-size: 14px;">Total: $500</div>
+        </div>
+
+        <!-- Right: Request + Timeline -->
+        <div>
+          <!-- Request form -->
+          <div style="background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+            <div style="color: #aaa; font-size: 12px; margin-bottom: 6px;">Submit a Project Request</div>
+            <input class="mock-input" placeholder="Describe what you need..." style="width: 100%; margin-bottom: 8px;">
+            <button class="mock-button" style="font-size: 11px; padding: 6px 12px;">Submit Request</button>
+          </div>
+
+          <!-- Timeline -->
+          <div style="border-left: 2px solid #333; padding-left: 12px;">
+            <div style="margin-bottom: 10px;">
+              <div style="color: #888; font-size: 10px;">Mar 19, 2:00 PM</div>
+              <div style="color: #e0e0e0; font-size: 12px;">Frontend UI finished</div>
+              <span style="color: #7c6ff7; font-size: 10px;">FREELANCER</span>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <div style="color: #888; font-size: 10px;">Mar 19, 11:30 AM</div>
+              <div style="color: #e0e0e0; font-size: 12px;">"Can we add a newsletter signup?"</div>
+              <span style="color: #f59e0b; font-size: 10px;">GRAY AREA — AWAITING REVIEW</span>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <div style="color: #888; font-size: 10px;">Mar 19, 10:00 AM</div>
+              <div style="color: #e0e0e0; font-size: 12px;">Scope approved and locked.</div>
+              <span style="color: #888; font-size: 10px;">SYSTEM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment button (shown when COMPLETED) -->
+      <div style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%); border-radius: 8px; padding: 16px; margin-top: 16px; text-align: center; opacity: 0.4;">
+        <div style="font-size: 16px; font-weight: 700; color: #1a1a2e;">Release Payment via Raenest — $500</div>
+        <div style="font-size: 11px; color: #166534; margin-top: 4px;">Activates when project is marked complete</div>
+      </div>
+    </div>
+  </div>
+</div>

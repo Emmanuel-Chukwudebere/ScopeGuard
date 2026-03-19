@@ -1,0 +1,417 @@
+<h2>ScopeGuard — UI Wireframes (shadcn/ui)</h2>
+<p class="subtitle">All components map to shadcn: Card, Button, Input, Textarea, Badge, Separator, Dialog</p>
+
+<style>
+  /* shadcn/ui design tokens */
+  :root {
+    --background: #09090b;
+    --card: #09090b;
+    --card-border: #27272a;
+    --foreground: #fafafa;
+    --muted: #a1a1aa;
+    --muted-foreground: #71717a;
+    --primary: #fafafa;
+    --primary-foreground: #18181b;
+    --secondary: #27272a;
+    --secondary-foreground: #fafafa;
+    --destructive: #ef4444;
+    --accent: #27272a;
+    --ring: #d4d4d8;
+    --radius: 8px;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --blue: #3b82f6;
+    --violet: #8b5cf6;
+  }
+
+  .shadcn-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .shadcn-card-header {
+    margin-bottom: 6px;
+  }
+  .shadcn-card-title {
+    color: var(--foreground);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+  .shadcn-card-description {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .shadcn-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.15s;
+  }
+  .shadcn-btn-primary {
+    background: var(--foreground);
+    color: var(--primary-foreground);
+  }
+  .shadcn-btn-secondary {
+    background: var(--secondary);
+    color: var(--secondary-foreground);
+    border: 1px solid var(--card-border);
+  }
+  .shadcn-btn-destructive {
+    background: var(--destructive);
+    color: white;
+  }
+  .shadcn-btn-outline {
+    background: transparent;
+    color: var(--foreground);
+    border: 1px solid var(--card-border);
+  }
+  .shadcn-btn-ghost {
+    background: transparent;
+    color: var(--muted);
+  }
+  .shadcn-input {
+    background: transparent;
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--foreground);
+    font-size: 13px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+  }
+  .shadcn-input::placeholder { color: var(--muted-foreground); }
+  .shadcn-textarea {
+    background: transparent;
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: var(--foreground);
+    font-size: 13px;
+    width: 100%;
+    min-height: 120px;
+    box-sizing: border-box;
+    resize: vertical;
+    outline: none;
+    font-family: inherit;
+  }
+  .shadcn-textarea::placeholder { color: var(--muted-foreground); }
+  .shadcn-label {
+    color: var(--foreground);
+    font-size: 13px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .shadcn-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .badge-pending { background: #422006; color: var(--yellow); border: 1px solid #854d0e; }
+  .badge-locked { background: #052e16; color: var(--green); border: 1px solid #166534; }
+  .badge-completed { background: #172554; color: var(--blue); border: 1px solid #1e40af; }
+  .badge-review { background: #422006; color: var(--yellow); border: 1px solid #854d0e; }
+  .badge-gray { background: #27272a; color: var(--muted); border: 1px solid var(--card-border); }
+  .shadcn-separator {
+    height: 1px;
+    background: var(--card-border);
+    border: none;
+    margin: 16px 0;
+  }
+  .shadcn-alert {
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .alert-warning {
+    border-color: #854d0e;
+    background: #422006;
+  }
+  .component-tag {
+    display: inline-block;
+    background: #18181b;
+    border: 1px solid #3f3f46;
+    color: #a78bfa;
+    font-size: 10px;
+    font-family: monospace;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+</style>
+
+<!-- VIEW 1: FREELANCER SETUP -->
+<div class="section">
+  <h3>1. Freelancer Setup — /create <span class="component-tag">Card</span> <span class="component-tag">Input</span> <span class="component-tag">Textarea</span> <span class="component-tag">Button</span></h3>
+  <div class="mockup">
+    <div class="mockup-header">scopeguard.vercel.app/create</div>
+    <div class="mockup-body" style="padding: 32px; display: flex; justify-content: center;">
+      <div style="width: 480px;">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <div style="font-size: 22px; font-weight: 700; color: var(--foreground); letter-spacing: -0.025em;">ScopeGuard</div>
+          <div style="font-size: 14px; color: var(--muted); margin-top: 4px;">Eliminate scope creep. Get paid.</div>
+        </div>
+
+        <div class="shadcn-card">
+          <div class="shadcn-card-header">
+            <div class="shadcn-card-title">New Project</div>
+            <div class="shadcn-card-description">Paste your client notes and we'll generate a professional SOW.</div>
+          </div>
+          <hr class="shadcn-separator">
+
+          <div style="margin-bottom: 16px;">
+            <label class="shadcn-label">Your Name</label>
+            <input class="shadcn-input" placeholder="Emmanuel">
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <label class="shadcn-label">Client Notes / Chat History</label>
+            <textarea class="shadcn-textarea" placeholder="Paste your client conversation, project brief, or requirements here..."></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+            <div>
+              <label class="shadcn-label">Base Price ($)</label>
+              <input class="shadcn-input" placeholder="500">
+            </div>
+            <div>
+              <label class="shadcn-label">Raenest Payment Link</label>
+              <input class="shadcn-input" placeholder="https://pay.raenest.com/...">
+            </div>
+          </div>
+
+          <button class="shadcn-btn shadcn-btn-primary" style="width: 100%; padding: 10px;">Generate SOW with AI</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 2: FREELANCER DASHBOARD -->
+<div class="section" style="margin-top: 32px;">
+  <h3>2. Freelancer Dashboard — /project/[id] <span class="component-tag">Card</span> <span class="component-tag">Badge</span> <span class="component-tag">Separator</span> <span class="component-tag">Button</span> <span class="component-tag">Input</span></h3>
+  <div class="mockup">
+    <div class="mockup-header">scopeguard.vercel.app/project/abc-xyz-123</div>
+    <div class="mockup-body" style="padding: 24px;">
+      <!-- Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+          <div style="font-size: 20px; font-weight: 700; color: var(--foreground); letter-spacing: -0.025em;">Project Dashboard</div>
+          <div style="font-size: 13px; color: var(--muted); margin-top: 2px;">Client portal is live</div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <span class="shadcn-badge badge-locked">LOCKED</span>
+          <span class="shadcn-badge badge-review">1 Review</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <!-- Left: SOW Card -->
+        <div class="shadcn-card">
+          <div class="shadcn-card-header">
+            <div class="shadcn-card-title">Scope of Work</div>
+            <div class="shadcn-card-description">AI-generated from client notes</div>
+          </div>
+          <hr class="shadcn-separator">
+          <div style="margin-bottom: 12px;">
+            <div style="color: var(--green); font-size: 12px; font-weight: 600; margin-bottom: 6px;">IN SCOPE</div>
+            <ul style="color: var(--foreground); font-size: 13px; padding-left: 18px; margin: 0; line-height: 1.8;">
+              <li>Landing Page</li><li>Contact Form</li><li>Responsive Design</li>
+            </ul>
+          </div>
+          <div style="margin-bottom: 12px;">
+            <div style="color: var(--destructive); font-size: 12px; font-weight: 600; margin-bottom: 6px;">OUT OF SCOPE</div>
+            <ul style="color: var(--muted); font-size: 13px; padding-left: 18px; margin: 0; line-height: 1.8;">
+              <li>User Login</li><li>Database Setup</li>
+            </ul>
+          </div>
+          <hr class="shadcn-separator">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: var(--muted); font-size: 13px;">Total Price</span>
+            <span style="color: var(--foreground); font-size: 18px; font-weight: 700;">$500</span>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Gray Area Review Alert -->
+          <div class="shadcn-alert alert-warning">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+              <div style="font-size: 13px; font-weight: 600; color: var(--yellow);">Needs Your Review</div>
+              <span class="shadcn-badge badge-gray">GRAY AREA</span>
+            </div>
+            <div style="color: var(--foreground); font-size: 13px; margin-bottom: 4px;">"Can we add a newsletter signup?"</div>
+            <div style="color: var(--muted-foreground); font-size: 12px; margin-bottom: 12px;">AI: Related to contact form but not explicitly in scope.</div>
+            <div style="display: flex; gap: 8px;">
+              <button class="shadcn-btn shadcn-btn-primary" style="font-size: 12px; padding: 6px 12px;">Approve</button>
+              <button class="shadcn-btn shadcn-btn-outline" style="font-size: 12px; padding: 6px 12px;">+ Surcharge</button>
+              <button class="shadcn-btn shadcn-btn-destructive" style="font-size: 12px; padding: 6px 12px;">Reject</button>
+            </div>
+          </div>
+
+          <!-- Post Update Card -->
+          <div class="shadcn-card" style="padding: 16px;">
+            <div style="display: flex; gap: 8px;">
+              <input class="shadcn-input" placeholder="Post an update..." style="flex: 1;">
+              <button class="shadcn-btn shadcn-btn-secondary" style="font-size: 12px; white-space: nowrap;">Post</button>
+            </div>
+            <div style="margin-top: 8px;">
+              <button class="shadcn-btn shadcn-btn-outline" style="font-size: 12px; width: 100%; border-color: var(--blue); color: var(--blue);">Mark Project Complete</button>
+            </div>
+          </div>
+
+          <!-- Activity Timeline -->
+          <div class="shadcn-card" style="padding: 16px;">
+            <div style="font-size: 13px; font-weight: 600; color: var(--foreground); margin-bottom: 12px;">Activity</div>
+            <div style="border-left: 2px solid var(--card-border); padding-left: 14px;">
+              <div style="margin-bottom: 12px;">
+                <div style="color: var(--muted-foreground); font-size: 11px;">Mar 19, 2:00 PM</div>
+                <div style="color: var(--foreground); font-size: 13px;">Frontend UI finished</div>
+                <span class="shadcn-badge" style="background: #2e1065; color: var(--violet); border: 1px solid #581c87; font-size: 10px; margin-top: 2px;">FREELANCER</span>
+              </div>
+              <div>
+                <div style="color: var(--muted-foreground); font-size: 11px;">Mar 19, 10:00 AM</div>
+                <div style="color: var(--foreground); font-size: 13px;">Client approved SOW. Scope locked.</div>
+                <span class="shadcn-badge" style="background: var(--secondary); color: var(--muted); border: 1px solid var(--card-border); font-size: 10px; margin-top: 2px;">SYSTEM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Client Link Bar -->
+      <div class="shadcn-card" style="margin-top: 16px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;">
+        <div>
+          <div style="color: var(--muted-foreground); font-size: 11px;">Share with your client</div>
+          <div style="color: var(--blue); font-size: 13px; font-family: monospace;">scopeguard.vercel.app/portal/abc-xyz-123</div>
+        </div>
+        <button class="shadcn-btn shadcn-btn-secondary" style="font-size: 12px;">Copy Link</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 3: CLIENT PORTAL -->
+<div class="section" style="margin-top: 32px;">
+  <h3>3. Client Portal — /portal/[id] <span class="component-tag">Card</span> <span class="component-tag">Badge</span> <span class="component-tag">Input</span> <span class="component-tag">Button</span> <span class="component-tag">Dialog</span></h3>
+  <div class="mockup">
+    <div class="mockup-header">scopeguard.vercel.app/portal/abc-xyz-123</div>
+    <div class="mockup-body" style="padding: 24px;">
+      <!-- Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+          <div style="font-size: 20px; font-weight: 700; color: var(--foreground); letter-spacing: -0.025em;">Your Project</div>
+          <div style="font-size: 13px; color: var(--muted); margin-top: 2px;">Managed by Emmanuel</div>
+        </div>
+        <span class="shadcn-badge badge-locked">LOCKED</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <!-- Left: SOW (read-only) -->
+        <div class="shadcn-card">
+          <div class="shadcn-card-header">
+            <div class="shadcn-card-title">Scope of Work</div>
+            <div class="shadcn-card-description">Approved and locked</div>
+          </div>
+          <hr class="shadcn-separator">
+          <div style="margin-bottom: 12px;">
+            <div style="color: var(--green); font-size: 12px; font-weight: 600; margin-bottom: 6px;">IN SCOPE</div>
+            <ul style="color: var(--foreground); font-size: 13px; padding-left: 18px; margin: 0; line-height: 1.8;">
+              <li>Landing Page</li><li>Contact Form</li><li>Responsive Design</li>
+            </ul>
+          </div>
+          <div style="margin-bottom: 12px;">
+            <div style="color: var(--destructive); font-size: 12px; font-weight: 600; margin-bottom: 6px;">OUT OF SCOPE</div>
+            <ul style="color: var(--muted); font-size: 13px; padding-left: 18px; margin: 0; line-height: 1.8;">
+              <li>User Login</li><li>Database Setup</li>
+            </ul>
+          </div>
+          <hr class="shadcn-separator">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: var(--muted); font-size: 13px;">Project Cost</span>
+            <span style="color: var(--foreground); font-size: 18px; font-weight: 700;">$500</span>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Submit Request -->
+          <div class="shadcn-card" style="padding: 16px;">
+            <div style="font-size: 13px; font-weight: 600; color: var(--foreground); margin-bottom: 8px;">Submit a Request</div>
+            <div style="display: flex; gap: 8px;">
+              <input class="shadcn-input" placeholder="Describe what you need..." style="flex: 1;">
+              <button class="shadcn-btn shadcn-btn-primary" style="font-size: 12px; white-space: nowrap;">Submit</button>
+            </div>
+            <div style="color: var(--muted-foreground); font-size: 11px; margin-top: 6px;">Requests are checked against the locked scope by AI.</div>
+          </div>
+
+          <!-- Activity Timeline -->
+          <div class="shadcn-card" style="padding: 16px; flex: 1;">
+            <div style="font-size: 13px; font-weight: 600; color: var(--foreground); margin-bottom: 12px;">Activity</div>
+            <div style="border-left: 2px solid var(--card-border); padding-left: 14px;">
+              <div style="margin-bottom: 12px;">
+                <div style="color: var(--muted-foreground); font-size: 11px;">Mar 19, 2:00 PM</div>
+                <div style="color: var(--foreground); font-size: 13px;">Frontend UI finished</div>
+                <span class="shadcn-badge" style="background: #2e1065; color: var(--violet); border: 1px solid #581c87; font-size: 10px; margin-top: 2px;">FREELANCER</span>
+              </div>
+              <div style="margin-bottom: 12px;">
+                <div style="color: var(--muted-foreground); font-size: 11px;">Mar 19, 11:30 AM</div>
+                <div style="color: var(--foreground); font-size: 13px;">"Can we add a newsletter signup?"</div>
+                <span class="shadcn-badge badge-review" style="font-size: 10px; margin-top: 2px;">AWAITING REVIEW</span>
+              </div>
+              <div>
+                <div style="color: var(--muted-foreground); font-size: 11px;">Mar 19, 10:00 AM</div>
+                <div style="color: var(--foreground); font-size: 13px;">Scope approved and locked.</div>
+                <span class="shadcn-badge" style="background: var(--secondary); color: var(--muted); border: 1px solid var(--card-border); font-size: 10px; margin-top: 2px;">SYSTEM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Button (COMPLETED state) -->
+      <div style="margin-top: 16px; border: 1px solid #166534; background: #052e16; border-radius: var(--radius); padding: 20px; text-align: center; opacity: 0.4;">
+        <div style="font-size: 16px; font-weight: 700; color: var(--green);">Release Payment via Raenest — $500</div>
+        <div style="font-size: 12px; color: #4ade80; margin-top: 4px; opacity: 0.7;">Activates when project is marked complete</div>
+      </div>
+
+      <!-- Out-of-Scope Dialog Preview -->
+      <div style="margin-top: 32px;">
+        <h3 style="color: var(--foreground); font-size: 14px; margin-bottom: 12px;">Out-of-Scope Intercept <span class="component-tag">AlertDialog</span></h3>
+        <div style="background: rgba(0,0,0,0.6); border-radius: var(--radius); padding: 32px; display: flex; justify-content: center;">
+          <div class="shadcn-card" style="width: 420px; padding: 24px;">
+            <div style="font-size: 16px; font-weight: 600; color: var(--foreground); margin-bottom: 4px;">Out of Scope</div>
+            <div style="color: var(--muted); font-size: 13px; margin-bottom: 16px;">This request falls outside the agreed scope of work.</div>
+            <div class="shadcn-alert" style="margin-bottom: 16px; background: var(--secondary);">
+              <div style="color: var(--foreground); font-size: 13px; margin-bottom: 6px;">"Add user authentication with Google login"</div>
+              <div style="color: var(--muted-foreground); font-size: 12px;">AI: User Login is explicitly listed as out of scope. This would require backend auth setup, OAuth integration, and session management.</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <span style="color: var(--muted); font-size: 13px;">Estimated surcharge</span>
+              <span style="color: var(--yellow); font-size: 18px; font-weight: 700;">+$150</span>
+            </div>
+            <div style="display: flex; gap: 8px; justify-content: flex-end;">
+              <button class="shadcn-btn shadcn-btn-outline" style="font-size: 13px;">Withdraw</button>
+              <button class="shadcn-btn shadcn-btn-primary" style="font-size: 13px;">Request Anyway</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
