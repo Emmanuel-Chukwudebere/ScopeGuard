@@ -21,24 +21,24 @@ export function SowCard({
         <CardTitle className="text-base">Scope of Work</CardTitle>
         {description && <CardDescription>{description}</CardDescription>}
       </CardHeader>
-      <CardContent>
-        <div className="mb-4">
-          <p className="text-xs font-semibold text-green-500 mb-2">IN SCOPE</p>
-          <ul className="text-sm text-foreground list-disc pl-5 space-y-1">
+      <CardContent className="space-y-6">
+        <div>
+          <p className="text-xs font-semibold text-green-500 mb-3">IN SCOPE</p>
+          <ul className="text-sm text-foreground list-disc pl-5 space-y-2">
             {sowData.inScope.map((item, i) => (
               <li key={i}>{item}</li>
             ))}
           </ul>
         </div>
-        <div className="mb-4">
-          <p className="text-xs font-semibold text-red-500 mb-2">OUT OF SCOPE</p>
-          <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-1">
+        <div>
+          <p className="text-xs font-semibold text-red-500 mb-3">OUT OF SCOPE</p>
+          <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-2">
             {sowData.outOfScope.map((item, i) => (
               <li key={i}>{item}</li>
             ))}
           </ul>
         </div>
-        <Separator className="my-4" />
+        <Separator />
         <div className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">Total Price</span>
           <span className="text-lg font-bold">${sowData.totalPrice}</span>
