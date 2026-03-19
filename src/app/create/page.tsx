@@ -93,7 +93,7 @@ export default function CreatePage() {
             </CardHeader>
             <Separator />
             <CardContent className="pt-6 space-y-4">
-              <div>
+              <div className="space-y-2">
                 <Label htmlFor="name">Your Name</Label>
                 <Input
                   id="name"
@@ -102,7 +102,7 @@ export default function CreatePage() {
                   onChange={(e) => setFreelancerName(e.target.value)}
                 />
               </div>
-              <div>
+              <div className="space-y-2">
                 <Label htmlFor="notes">Client Notes / Chat History</Label>
                 <Textarea
                   id="notes"
@@ -113,7 +113,7 @@ export default function CreatePage() {
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <div>
+                <div className="space-y-2">
                   <Label htmlFor="price">Base Price ($)</Label>
                   <Input
                     id="price"
@@ -123,7 +123,7 @@ export default function CreatePage() {
                     onChange={(e) => setBasePrice(e.target.value)}
                   />
                 </div>
-                <div>
+                <div className="space-y-2">
                   <Label htmlFor="raenest">Raenest Payment Link</Label>
                   <Input
                     id="raenest"
