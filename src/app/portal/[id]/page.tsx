@@ -253,13 +253,10 @@ export default function PortalPage() {
           <AlertDialogFooter>
             <AlertDialogCancel>Withdraw</AlertDialogCancel>
             <AlertDialogAction
-              onClick={async () => {
-                await saveRequest(
-                  scopeDialog.requestText,
-                  scopeDialog.verdict,
-                  scopeDialog.reasoning,
-                  scopeDialog.estimatedSurcharge
-                );
+              onClick={() => {
+                const { requestText: text, verdict, reasoning, estimatedSurcharge } = scopeDialog;
+                setScopeDialog((prev) => ({ ...prev, open: false }));
+                saveRequest(text, verdict, reasoning, estimatedSurcharge);
               }}
             >
               Request Anyway
