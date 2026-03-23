@@ -81,6 +81,14 @@ export function ActivityTimeline({ entries }: { entries: ActivityLogEntry[] }) {
                     APPROVED
                   </Badge>
                 )}
+                {entry.reviewStatus === "SURCHARGE_PROPOSED" && (
+                  <Badge
+                    variant="outline"
+                    className="bg-yellow-950 text-yellow-500 border-yellow-800"
+                  >
+                    SURCHARGE PROPOSED — +${entry.surcharge}
+                  </Badge>
+                )}
                 {entry.reviewStatus === "REJECTED" && (
                   <Badge
                     variant="outline"

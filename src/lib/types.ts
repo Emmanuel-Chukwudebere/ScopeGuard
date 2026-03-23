@@ -4,7 +4,7 @@ export type LogEntryType = "SYSTEM" | "FREELANCER_UPDATE" | "CLIENT_REQUEST";
 
 export type ScopeVerdict = "IN_SCOPE" | "GRAY_AREA" | "OUT_OF_SCOPE";
 
-export type ReviewStatus = "PENDING_REVIEW" | "APPROVED" | "REJECTED";
+export type ReviewStatus = "PENDING_REVIEW" | "SURCHARGE_PROPOSED" | "APPROVED" | "REJECTED";
 
 export interface SowData {
   summary: string;

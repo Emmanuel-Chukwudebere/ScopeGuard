@@ -16,9 +16,13 @@ export async function POST(request: Request) {
       { status: 404 }
     );
   }
-  if (entry.reviewStatus !== "PENDING_REVIEW") {
+
+  // Freelancer actions: from PENDING_REVIEW
+  // Client actions: from SURCHARGE_PROPOSED
+  const validFrom = ["PENDING_REVIEW", "SURCHARGE_PROPOSED"];
+  if (!validFrom.includes(entry.reviewStatus ?? "")) {
     return NextResponse.json(
-      { error: "Entry is not pending review" },
+      { error: "Entry cannot be reviewed in current state" },
       { status: 400 }
     );
   }

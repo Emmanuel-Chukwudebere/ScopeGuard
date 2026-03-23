@@ -20,7 +20,7 @@ export function ReviewCard({
   const [loading, setLoading] = useState(false);
 
   async function handleReview(
-    action: "APPROVED" | "REJECTED",
+    action: "APPROVED" | "REJECTED" | "SURCHARGE_PROPOSED",
     surcharge?: number
   ) {
     setLoading(true);
@@ -48,7 +48,7 @@ export function ReviewCard({
           variant="outline"
           className="bg-zinc-800 text-zinc-400 border-zinc-700"
         >
-          GRAY AREA
+          {entry.scopeVerdict === "OUT_OF_SCOPE" ? "OUT OF SCOPE" : "GRAY AREA"}
         </Badge>
       </div>
       <p className="text-sm text-foreground mb-1">
@@ -72,10 +72,10 @@ export function ReviewCard({
             size="sm"
             disabled={loading || !surchargeAmount}
             onClick={() =>
-              handleReview("APPROVED", Number(surchargeAmount))
+              handleReview("SURCHARGE_PROPOSED", Number(surchargeAmount))
             }
           >
-            Confirm
+            Propose
           </Button>
           <Button
             size="sm"

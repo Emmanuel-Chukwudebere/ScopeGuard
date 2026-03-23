@@ -121,6 +121,20 @@ export default function PortalPage() {
   }
 
   const totalPrice = getTotalPrice(project);
+  const surchargeProposals = project.activityLog.filter(
+    (e) => e.reviewStatus === "SURCHARGE_PROPOSED"
+  );
+
+  async function handleSurchargeResponse(logEntryId: string, action: "APPROVED" | "REJECTED") {
+    setLoading(true);
+    await fetch("/api/review", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectId, logEntryId, action }),
+    });
+    await fetchProject();
+    setLoading(false);
+  }
 
   return (
     <div className="min-h-screen bg-background p-6">
@@ -187,6 +201,52 @@ export default function PortalPage() {
                 </CardContent>
               </Card>
             )}
+
+            {/* Surcharge Proposals from Freelancer */}
+            {surchargeProposals.map((entry) => (
+              <div
+                key={entry.id}
+                className="border border-yellow-800 bg-yellow-950 rounded-lg p-4"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <p className="text-sm font-semibold text-yellow-500">
+                    Surcharge Proposal
+                  </p>
+                  <span className="text-lg font-bold text-yellow-500">
+                    +${entry.surcharge}
+                  </span>
+                </div>
+                <p className="text-sm text-foreground mb-1">
+                  &ldquo;{entry.message}&rdquo;
+                </p>
+                {entry.aiReasoning && (
+                  <p className="text-xs text-muted-foreground mb-3">
+                    {entry.aiReasoning}
+                  </p>
+                )}
+                <p className="text-xs text-muted-foreground mb-3">
+                  {project.freelancerName} has proposed a surcharge of ${entry.surcharge} for this request.
+                  Accepting will add it to your total.
+                </p>
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    disabled={loading}
+                    onClick={() => handleSurchargeResponse(entry.id, "APPROVED")}
+                  >
+                    Accept (+${entry.surcharge})
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    disabled={loading}
+                    onClick={() => handleSurchargeResponse(entry.id, "REJECTED")}
+                  >
+                    Withdraw
+                  </Button>
+                </div>
+              </div>
+            ))}
 
             {/* Timeline */}
             <ActivityTimeline entries={project.activityLog} />
