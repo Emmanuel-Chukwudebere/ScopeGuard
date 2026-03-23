@@ -18,7 +18,7 @@ import {
 import { SowCard } from "@/components/sow-card";
 import { ActivityTimeline } from "@/components/activity-timeline";
 import { StatusBadge } from "@/components/status-badge";
-import { Project } from "@/lib/types";
+import { Project, getTotalPrice } from "@/lib/types";
 
 export default function PortalPage() {
   const params = useParams();
@@ -120,6 +120,8 @@ export default function PortalPage() {
     );
   }
 
+  const totalPrice = getTotalPrice(project);
+
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-5xl mx-auto">
@@ -203,13 +205,13 @@ export default function PortalPage() {
               className="w-full bg-green-600 hover:bg-green-700 text-white"
               size="lg"
             >
-              Release Payment via Raenest — ${project.sowData.totalPrice}
+              Release Payment via Raenest — ${totalPrice}
             </Button>
           </a>
         ) : (
           <div className="mt-4 border border-green-800 bg-green-950 rounded-lg p-5 text-center opacity-40">
             <p className="text-base font-bold text-green-500">
-              Release Payment via Raenest — ${project.sowData.totalPrice}
+              Release Payment via Raenest — ${totalPrice}
             </p>
             <p className="text-xs text-green-400 mt-1 opacity-70">
               Activates when project is marked complete

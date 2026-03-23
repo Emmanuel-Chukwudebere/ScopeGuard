@@ -35,3 +35,10 @@ export interface Project {
   sowData: SowData;
   activityLog: ActivityLogEntry[];
 }
+
+export function getTotalPrice(project: Project): number {
+  const approvedSurcharges = project.activityLog
+    .filter((e) => e.reviewStatus === "APPROVED" && e.surcharge)
+    .reduce((sum, e) => sum + (e.surcharge ?? 0), 0);
+  return project.sowData.totalPrice + approvedSurcharges;
+}

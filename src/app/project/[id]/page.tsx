@@ -10,7 +10,7 @@ import { SowCard } from "@/components/sow-card";
 import { ActivityTimeline } from "@/components/activity-timeline";
 import { StatusBadge } from "@/components/status-badge";
 import { ReviewCard } from "@/components/review-card";
-import { Project } from "@/lib/types";
+import { Project, getTotalPrice } from "@/lib/types";
 
 export default function ProjectPage() {
   const params = useParams();
@@ -19,6 +19,8 @@ export default function ProjectPage() {
   const [updateText, setUpdateText] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [editingLink, setEditingLink] = useState(false);
+  const [newLink, setNewLink] = useState("");
 
   const fetchProject = useCallback(async () => {
     const res = await fetch(`/api/project/${projectId}`);
@@ -61,6 +63,19 @@ export default function ProjectPage() {
     setTimeout(() => setCopied(false), 2000);
   }
 
+  async function handleUpdateLink() {
+    if (!newLink) return;
+    setLoading(true);
+    await fetch("/api/update-link", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectId, raenestLink: newLink }),
+    });
+    await fetchProject();
+    setEditingLink(false);
+    setLoading(false);
+  }
+
   if (!project) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -69,6 +84,7 @@ export default function ProjectPage() {
     );
   }
 
+  const totalPrice = getTotalPrice(project);
   const pendingReviews = project.activityLog.filter(
     (e) => e.reviewStatus === "PENDING_REVIEW"
   );
@@ -161,6 +177,55 @@ export default function ProjectPage() {
             <ActivityTimeline entries={project.activityLog} />
           </div>
         </div>
+
+        {/* Total with surcharges */}
+        {totalPrice !== project.sowData.totalPrice && (
+          <Card className="mt-4">
+            <CardContent className="py-3 flex items-center justify-between">
+              <div>
+                <p className="text-xs text-muted-foreground">Updated Total (base + approved surcharges)</p>
+                <p className="text-sm text-foreground">
+                  ${project.sowData.totalPrice} base + ${totalPrice - project.sowData.totalPrice} surcharges
+                </p>
+              </div>
+              <span className="text-lg font-bold">${totalPrice}</span>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Raenest Payment Link */}
+        <Card className="mt-4">
+          <CardContent className="py-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-muted-foreground">Raenest Payment Link</p>
+                <p className="text-sm font-mono text-blue-500">{project.raenestLink}</p>
+              </div>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => {
+                  setNewLink(project.raenestLink);
+                  setEditingLink(!editingLink);
+                }}
+              >
+                {editingLink ? "Cancel" : "Edit"}
+              </Button>
+            </div>
+            {editingLink && (
+              <div className="flex gap-2 mt-3">
+                <Input
+                  placeholder="New Raenest payment link..."
+                  value={newLink}
+                  onChange={(e) => setNewLink(e.target.value)}
+                />
+                <Button size="sm" disabled={loading} onClick={handleUpdateLink}>
+                  Save
+                </Button>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         {/* Client Link Bar */}
         <Card className="mt-4">
